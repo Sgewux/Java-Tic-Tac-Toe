@@ -12,6 +12,7 @@ public class TicTacToe{
             {'*', '*', '*'}
         };
 
+        System.out.println("Welcome to Tic-Tac-Toe :D \nYou are X and pc is O");
 
         while(true){
             
@@ -96,7 +97,7 @@ public class TicTacToe{
                 break;
             }    
             
-            System.out.println("\033[H\033[2J");
+           System.out.println("\033[H\033[2J");
 
         }
 

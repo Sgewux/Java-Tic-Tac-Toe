@@ -218,31 +218,22 @@ public final class PlayMethods {
         
         }else if(threat[0] != -1 && threat[1] != -1){ //If we dont have an opportunity to win but we do have a threat
             board[threat[0]][threat[1]] = 'O';
+  
         
         }else{ //If we dont have an opportunity to win neither a threat
+            int myRow;
+            int myColumn;
+            myRow = (int)Math.floor(Math.random()*(2-0+1)+0);
+            myColumn = (int)Math.floor(Math.random()*(2-0+1)+0);
 
-            int myRow = (int)Math.floor(Math.random()*(2-0+1)+0);
-            int myColumn = (int)Math.floor(Math.random()*(2-0+1)+0);
+            while(board[myRow][myColumn] != '*'){
+                myRow = (int)Math.floor(Math.random()*(2-0+1)+0);
+                myColumn = (int)Math.floor(Math.random()*(2-0+1)+0);
+            }
+
             board[myRow][myColumn] = 'O';
         }
 
     }
-
-
-    public static void main(String[] args){
-        char[][] board = {
-            {'O', '*', '*'},
-            {'X', 'X', '*'},
-            {'*', '*', '*'}
-        };
-
-        printBoard(board);
-        selectPosition(board);
-        System.out.println(" ");
-        printBoard(board);
-
-    }
-
-    
 
 }
