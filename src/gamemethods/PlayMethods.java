@@ -15,6 +15,13 @@ public final class PlayMethods {
         }
     }
 
+    private static boolean isCorner(Integer[] a){
+        if((a[0] + a[1] == 0 || a[0] + a[1] == 2 || a[0] + a[1] == 4) && a[0] != 1) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     //All these methods from here to the end are for the pc's playing engine
 
     private static List<Integer[]> getPositions(char[][] board, char who){
@@ -82,24 +89,33 @@ public final class PlayMethods {
                             threat[1] = b;
                         }
 
-                    }else if((firstPos[0] + firstPos[1] == 0 || firstPos[0] + firstPos[1] == 2 || firstPos[0] + firstPos[1] == 4) && firstPos[0] != 1){
+                    }else if(isCorner(secondPos) && isCorner(firstPos)){
+                        
+
+                        if(board[1][1] == '*' && (threat[0] == -1 && threat[1] == -1)){
+                            threat[0] = 1;
+                            threat[1] = 1;
+                        }
+                    }else if(isCorner(firstPos)){
                         int a = Math.abs(firstPos[0] - 2);
                         int b = Math.abs(firstPos[1] - 2);
-        
+            
                         if(board[a][b] == '*' && threat[0] == -1 && threat[1] == -1){
                             threat[0] = a;
                             threat[1] = b;
                         }
                     
-                    }else if((secondPos[0] + secondPos[1] == 0 || secondPos[0] + secondPos[1] == 2 || secondPos[0] + secondPos[1] == 4) && secondPos[0] != 1){
+                    
+                    }else if(isCorner(secondPos)){
                         int a = Math.abs(secondPos[0] - 2);
                         int b = Math.abs(secondPos[1] - 2);
-        
+                 
                         if(board[a][b] == '*' && threat[0] == -1 && threat[1] == -1){
                             threat[0] = a;
                             threat[1] = b;
                         }
                     }
+                    
                 }
             }
         
@@ -112,7 +128,7 @@ public final class PlayMethods {
         }else if(positions.size() == 1){
             Integer[] position = positions.get(0);
 
-            if((position[0] + position[1] == 0 || position[0] + position[1] == 2 || position[0] + position[1] == 4) && position[0] != 1){
+            if(isCorner(position)){
                 int a = Math.abs(position[0] - 2);
                 int b = Math.abs(position[1] - 2);
 
@@ -160,7 +176,9 @@ public final class PlayMethods {
                         if(board[a][b] == '*' && opportunity[0] == -1 && opportunity[1] == -1){
                             opportunity[0] = a;
                             opportunity[1] = b;
+                            
                         }
+                        
                     
                     }else if(firstPos[1] == secondPos[1]){
                         int b = firstPos[1];
@@ -175,24 +193,39 @@ public final class PlayMethods {
                         if(board[a][b] == '*' && opportunity[0] == -1 && opportunity[1] == -1){
                             opportunity[0] = a;
                             opportunity[1] = b;
+                           
                         }
 
-                    }else if((firstPos[0] + firstPos[1] == 0 || firstPos[0] + firstPos[1] == 2 || firstPos[0] + firstPos[1] == 4) && firstPos[0] != 1){
+                        
+
+                    }else if(isCorner(secondPos) && isCorner(firstPos)){
+                        
+
+                        if(board[1][1] == '*' && (opportunity[0] == -1 && opportunity[1] == -1)){
+                            opportunity[0] = 1;
+                            opportunity[1] = 1;
+                        }
+                    }
+                    else if(isCorner(firstPos)){
                         int a = Math.abs(firstPos[0] - 2);
                         int b = Math.abs(firstPos[1] - 2);
         
-                        if(board[a][b] == '*' && opportunity[0] == -1 && opportunity[1] == -1){
+                        if((board[a][b] == '*' && opportunity[0] == -1 && opportunity[1] == -1) && board[1][1] == 'O'){
                             opportunity[0] = a;
                             opportunity[1] = b;
+                            
                         }
+
+                        
                     
-                    }else if((secondPos[0] + secondPos[1] == 0 || secondPos[0] + secondPos[1] == 2 || secondPos[0] + secondPos[1] == 4) && secondPos[0] != 1){
+                    }else if(isCorner(secondPos)){
                         int a = Math.abs(secondPos[0] - 2);
                         int b = Math.abs(secondPos[1] - 2);
         
-                        if(board[a][b] == '*' && opportunity[0] == -1 && opportunity[1] == -1){
+                        if((board[a][b] == '*' && opportunity[0] == -1 && opportunity[1] == -1) && board[1][1] == 'O'){
                             opportunity[0] = a;
                             opportunity[1] = b;
+                           
                         }
                     }
                 }
@@ -215,11 +248,11 @@ public final class PlayMethods {
 
         if(opportunity[0] != -1 && opportunity[1] != -1){ //If we have an opportunity to win
             board[opportunity[0]][opportunity[1]] = 'O';
+           
         
         }else if(threat[0] != -1 && threat[1] != -1){ //If we dont have an opportunity to win but we do have a threat
             board[threat[0]][threat[1]] = 'O';
-  
-        
+           
         }else{ //If we dont have an opportunity to win neither a threat
             int myRow;
             int myColumn;

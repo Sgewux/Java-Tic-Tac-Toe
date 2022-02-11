@@ -46,13 +46,13 @@ public class TicTacToe{
                     continue;
                 }
             }else{
-                System.out.println("\033[H\033[2J");
+               System.out.println("\033[H\033[2J");
                 System.out.println("Unvalid range.");
                 continue;
             }
 
             if(Checks.isThereAWinner(board) != 0){
-                System.out.println("\033[H\033[2J");
+               System.out.println("\033[H\033[2J");
                 switch(Checks.isThereAWinner(board)){
                     case 1:
                         System.out.println("User Won!");
@@ -77,7 +77,7 @@ public class TicTacToe{
 
 
             if(Checks.isThereAWinner(board) != 0){
-                System.out.println("\033[H\033[2J");
+               System.out.println("\033[H\033[2J");
                 switch(Checks.isThereAWinner(board)){
                     case 1:
                         System.out.println("User Won!");
@@ -97,7 +97,7 @@ public class TicTacToe{
                 break;
             }    
             
-           System.out.println("\033[H\033[2J");
+          System.out.println("\033[H\033[2J");
 
         }
 
